@@ -2,12 +2,14 @@
 
 The files in this repository were used to configure the network depicted below.
 
-Diagrams/ELKAzureTAD(Last).DRAWIO
+/Diagrams/ELKAzureTAD(Last).DRAWIO
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. 
 Alternatively, select portions of the playbook file may be used to install only certain pieces of it, such as Filebeat.
 
-  - _TODO: Enter the playbook file._
+  - install-elk.yml
+  - filebeat-playbook.yml
+  - metricbeat-playbook.yml
 
 This document contains the following details:
 - Description of the Topology
@@ -29,7 +31,7 @@ Load Balancers help distribute traffic evently among servers, mitigating DoS att
 machines behind the load balancer are functioning before sending any traffic to it. This function allows the system to don't have downtime for customers, and engineers to
 fix any issues seamless.
 
--What is the advantage of a jump box?
+- What is the advantage of a jump box?
 One of the advantage of jump boxes are that, while focusing traffic through a single node, it makes it easier to implement routing logic and design networks. 
 Additionally, It controls access to the other machines by allowing connections from specific IP addresses and forwarding to those machines, allowing other machines to
 have denied public access, making them more secured. Lastly, by limiting connections and root access through the jumpbox, you can make sure a keep better tracking of allowing
@@ -87,7 +89,7 @@ The playbook implements the following tasks:
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
-![TODO: Update the path with the name of your screenshot of docker ps output](Images/docker_ps_output.png)
+/Images/elk-docker.png
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
@@ -107,10 +109,16 @@ In order to use the playbook, you will need to have an Ansible control node alre
 
 SSH into the control node and follow the steps below:
 - Copy the playbook file to the /etc/ansible directory.
-- Update the ansible config file to include the target
-- Run the playbook, and navigate to login page (kibana) to check that the installation worked as expected.
+- Update the hosts file to include the target
+- Run the playbook, and navigate to the login page (kibana) to check that the installation worked as expected.
 
-_TODO: Answer the following questions to fill in the blanks:_
-- _Which file is the playbook? Where do you copy it?_
-- _Which file do you update to make Ansible run the playbook on a specific machine? Host. How do I specify which machine to install the ELK server on versus which to install Filebeat on?
-- _Which URL do you navigate to in order to check that the ELK server is running?
+- Which file is the playbook?
+   The playbook file is "install-elk.yml"
+- Where do you copy it?
+   We copy it to the /etc/ansible directory
+- Which file do you update to make Ansible run the playbook on a specific machine? 
+   Host file 
+- How do I specify which machine to install the ELK server on versus which to install Filebeat on?
+  By adding the "hosts:" tag in the ansible playbook pointing to the group (which we setup in the host file) corresponding
+- Which URL do you navigate to in order to check that the ELK server is running?
+  https://<ELK-Internal-IP>:5601/app/kibana
